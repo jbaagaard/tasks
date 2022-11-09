@@ -4,7 +4,7 @@ export const Wrapper = styled.div`
   max-width: 600px;
   display: flex;
   flex-direction: column;
-
+gap: 16px;
 `
 
 

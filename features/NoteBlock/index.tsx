@@ -1,53 +1,56 @@
 import * as S from "./NoteBlock.styled"
 import {useState} from "react";
-import * as Types from "../types";
 import NoteComponent from "../NoteComponent";
 import {saveBlock} from "../api";
+import {emptyNote} from "../noteUtils";
+import {INote, INoteBlock} from "../types";
 
-interface NoteBlockProps{
-    noteBlock:Types.INoteBlock
+interface NoteBlockProps {
+    noteBlock: INoteBlock
 }
-const NoteBLock = ({noteBlock}:NoteBlockProps) => {
-const [notes,setNotes] = useState<Types.INote[]>(noteBlock.notes)
 
-    function save(){
+const NoteBLock = ({noteBlock}: NoteBlockProps) => {
+    const [notes, setNotes] = useState<INote[]>(noteBlock.notes)
 
-    }
 
-    function handleNoteComponentOnChange(note:Types.INote) {
-    const tempNotes = notes
+    function handleNoteComponentOnChange(note: INote) {
+        const tempNotes = notes
         for (let i = 0; i < tempNotes.length; i++) {
-            if(tempNotes[i].id === note.id){
+            if (tempNotes[i].id === note.id) {
                 tempNotes[i] = note
             }
         }
+        save(tempNotes)
         setNotes(tempNotes)
     }
 
     function addNote() {
-    const newNote:Types.INote = {data: "", id: Math.random()+""+Math.random(), minutesSpend: 0, completion: "Not Started", text: "",active:false}
-        setNotes(notes=>[...notes,newNote])
+        const newNote: INote = emptyNote()
+        setNotes(notes => [...notes, newNote])
     }
 
-    async function handleSaveOnClick() {
-    let saveData =     noteBlock
+    async function save(notes: INote[]) {
+        let saveData = noteBlock
         noteBlock.notes = notes
-    await saveBlock(saveData)
-        alert("saved")
+        await saveBlock(saveData)
+    }
+
+    function handleNoteOnDelete(id:string) {
+        let tempNotes = notes.filter(n=>n.id!==id)
+        save(tempNotes)
+        setNotes(tempNotes)
     }
 
     return (
         <S.Wrapper>
             <S.Notes>
                 {
-                    notes.map(n=>
-                        <NoteComponent key={n.id} note={n} onChange={handleNoteComponentOnChange}/>
+                    notes.map(n =>
+                        <NoteComponent key={n.id} note={n} onChange={handleNoteComponentOnChange} onDelete={handleNoteOnDelete}/>
                     )
                 }
             </S.Notes>
             <button onClick={addNote}>add note</button>
-            <button onClick={()=>console.log(notes)}>console</button>
-            <button onClick={handleSaveOnClick}>save</button>
         </S.Wrapper>
     )
 }

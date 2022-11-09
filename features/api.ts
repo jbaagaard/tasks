@@ -1,4 +1,5 @@
-import {INoteBlock} from "./types";
+import {INoteBlock, JSONINoteBlock} from "./types";
+import {convertJSONINoteBLock} from "./noteUtils";
 
 function dateToDaySignature(date:Date){
     return date.getFullYear()+"-"+date.getMonth()+"/"+date.getDate()
@@ -14,8 +15,7 @@ export async function saveBlock(noteBlock:INoteBlock){
 export async function loadBlock(date:Date){
     let res = window.localStorage.getItem("block:"+dateToDaySignature(date))
     if(!!res){
-        let parsedRes = JSON.parse(res) as any
-        parsedRes.date = new Date(parsedRes.date)
-        return parsedRes
+        let parsedRes = JSON.parse(res) as JSONINoteBlock
+        return convertJSONINoteBLock(parsedRes)
     }
 }
