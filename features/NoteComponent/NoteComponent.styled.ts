@@ -4,14 +4,28 @@ import {SecondaryButton} from "../styled-components";
 const lineHeight = "42px"
 
 export const Wrapper = styled.div`
-  display: flex;
+  max-width: 800px;
+
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   gap: 8px;
   height: ${lineHeight};
   align-items: center;
+  padding-left: 8px;
+  &:hover{
+    background-color: rgba(0,0,0,0.03);
+  }
 `
 
 export const DataWrapper = styled.div`
   color: ${props => props.theme.text};
+
+`
+
+export const RightContent = styled.div`
+  display: flex;
+  gap: 8px;
+  align-items: center;
 
 `
 
@@ -23,7 +37,6 @@ export const LineNumber = styled.div`
 `
 
 export const InputWrapper = styled.div`
-
 `
 
 export const Input = styled.input<{comment:boolean}>`
@@ -31,12 +44,7 @@ export const Input = styled.input<{comment:boolean}>`
   height: ${lineHeight};
   color: ${props => props.comment? props.theme.textSubtle : props.theme.text};
   font-size: 1em;
-  width: 600px;
-`
-
-export const TimeWrapper = styled.div`
-  color: ${props => props.theme.text};
-
+width: 100%;
 `
 
 export const DeleteButton = styled(SecondaryButton)`

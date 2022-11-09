@@ -73,15 +73,16 @@ const NoteComponent = ({note, onChange, onDelete, index}: NoteComponentProps) =>
             <S.InputWrapper>
                 <S.Input value={text} onChange={handleTextOnChange} comment={comment}/>
             </S.InputWrapper>
-            {!comment &&
-                <>
-                    <TimeToggle time={time} value={active} onChange={handleStartButtonOnClick}/>
-                    <S.DataWrapper>
-                        {"data"}
-                    </S.DataWrapper>
-                </>
-            }
-            <S.DeleteButton onClick={handleOnDeleteClick}>x</S.DeleteButton>
+            <S.RightContent>
+                {!comment &&
+                    <>
+                        <TimeToggle time={time} value={active} onChange={handleStartButtonOnClick}/>
+                        <S.DataWrapper>
+                        </S.DataWrapper>
+                    </>
+                }
+                <S.DeleteButton onClick={handleOnDeleteClick}>x</S.DeleteButton>
+            </S.RightContent>
         </S.Wrapper>
     )
 }
