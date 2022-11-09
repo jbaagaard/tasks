@@ -45,12 +45,15 @@ const NoteBLock = ({noteBlock}: NoteBlockProps) => {
         <S.Wrapper>
             <S.Notes>
                 {
-                    notes.map(n =>
-                        <NoteComponent key={n.id} note={n} onChange={handleNoteComponentOnChange} onDelete={handleNoteOnDelete}/>
+                    notes.map((n,i) =>
+                        <NoteComponent key={n.id} note={n} onChange={handleNoteComponentOnChange} onDelete={handleNoteOnDelete} index={i}/>
                     )
                 }
             </S.Notes>
-            <button onClick={addNote}>add note</button>
+            <S.AddNoteButtonWrapper>
+                <S.AddNoteButton onClick={addNote}>+ Tilføj note</S.AddNoteButton>
+
+            </S.AddNoteButtonWrapper>
         </S.Wrapper>
     )
 }
