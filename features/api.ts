@@ -1,7 +1,7 @@
 import {INoteBlock, JSONINoteBlock} from "./types";
 import {convertJSONINoteBLock} from "./noteUtils";
 
-const v = "2"
+const v = "3"
 
 function dateToDaySignature(date:Date){
     return date.getFullYear()+"-"+date.getMonth()+"/"+date.getDate()

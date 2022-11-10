@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import {loadBlock} from "../api";
 import {INoteBlock} from "../types";
 import NoteBlock from "../NoteBlock";
+import {newNoteBlock} from "../noteUtils";
 
 interface DayProps {
     day:Date
@@ -18,7 +19,7 @@ const Day = ({day}: DayProps) => {
             if (!!res)
                 setBlock(res)
             else
-                setBlock({date: new Date(), id: Math.random() + "", notes: []})
+                setBlock(newNoteBlock(day))
         })()
     }, [day])
 

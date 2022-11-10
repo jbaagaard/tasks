@@ -1,14 +1,30 @@
 import {INote, INoteBlock, JSONINote, JSONINoteBlock} from "./types";
 
-export function emptyNote(): INote {
+export function emptyNote(text?: string): INote {
     return {
         lastUpdatedTimeSpend: new Date().getTime(),
         data: "",
         id: Math.random() + "" + Math.random(),
         timeSpend: 0,
         completion: "Not Started",
-        text: "",
+        text: text ? text : "",
         active: false
+    }
+}
+
+export function newNoteBlock(date: Date): INoteBlock {
+    return {
+        date: date,
+        id: Math.random() + "",
+        notes: [
+            emptyNote("//Hello world!"),
+            emptyNote(),
+            emptyNote(),
+            emptyNote(),
+            emptyNote(),
+            emptyNote(),
+            emptyNote(),
+        ]
     }
 }
 
