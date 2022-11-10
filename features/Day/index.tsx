@@ -5,21 +5,21 @@ import {INoteBlock} from "../types";
 import NoteBlock from "../NoteBlock";
 
 interface DayProps {
-
+    day:Date
 }
 
-const Day = ({}: DayProps) => {
+const Day = ({day}: DayProps) => {
     const [block, setBlock] = useState<INoteBlock | undefined>()
     useEffect(() => {
         (async () => {
-            const res = await loadBlock(new Date());
+            const res = await loadBlock(day);
             console.log(res)
             if (!!res)
                 setBlock(res)
             else
                 setBlock({date: new Date(), id: Math.random() + "", notes: []})
         })()
-    }, [])
+    }, [day])
 
     return (
         <S.Wrapper>

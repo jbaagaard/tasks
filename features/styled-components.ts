@@ -11,4 +11,6 @@ export const SecondaryButton = styled.button`
   width: 32px;
   text-align: center;
   cursor: pointer;
+  position: relative;
+
 `

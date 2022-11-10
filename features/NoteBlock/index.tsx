@@ -1,5 +1,5 @@
 import * as S from "./NoteBlock.styled"
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import NoteComponent from "../NoteComponent";
 import {saveBlock} from "../api";
 import {emptyNote} from "../noteUtils";
@@ -11,6 +11,10 @@ interface NoteBlockProps {
 
 const NoteBLock = ({noteBlock}: NoteBlockProps) => {
     const [notes, setNotes] = useState<INote[]>(noteBlock.notes)
+
+    useEffect(()=>{
+        setNotes(noteBlock.notes)
+    },[noteBlock])
 
 
     function handleNoteComponentOnChange(note: INote) {
