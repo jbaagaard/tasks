@@ -1,5 +1,5 @@
 import * as S from "./NoteBlock.styled"
-import {useEffect, useState} from "react";
+import {FormEvent, useEffect, useState} from "react";
 import NoteComponent from "../NoteComponent";
 import {saveBlock} from "../api";
 import {emptyNote} from "../noteUtils";
@@ -11,10 +11,20 @@ interface NoteBlockProps {
 
 const NoteBLock = ({noteBlock}: NoteBlockProps) => {
     const [notes, setNotes] = useState<INote[]>(noteBlock.notes)
+    const [noteTarget, setNoteTarget] = useState(0)
+
+    useEffect(() => {
+        setNotes(noteBlock.notes)
+    }, [noteBlock])
 
     useEffect(()=>{
-        setNotes(noteBlock.notes)
-    },[noteBlock])
+        console.log("draw")
+        document.addEventListener("keydown",e=>console.log(e))
+
+        return () => {
+            document.removeEventListener("keydown",e=>console.log(e))
+        }
+    },[])
 
 
     function handleNoteComponentOnChange(note: INote) {
@@ -39,18 +49,25 @@ const NoteBLock = ({noteBlock}: NoteBlockProps) => {
         await saveBlock(saveData)
     }
 
-    function handleNoteOnDelete(id:string) {
-        let tempNotes = notes.filter(n=>n.id!==id)
+    function handleNoteOnDelete(id: string) {
+        let tempNotes = notes.filter(n => n.id !== id)
         save(tempNotes)
         setNotes(tempNotes)
     }
+
 
     return (
         <S.Wrapper>
             <S.Notes>
                 {
-                    notes.map((n,i) =>
-                        <NoteComponent key={n.id} note={n} onChange={handleNoteComponentOnChange} onDelete={handleNoteOnDelete} index={i}/>
+                    notes.map((n, i) =>
+                        <NoteComponent key={n.id}
+                                       note={n}
+                                       onChange={handleNoteComponentOnChange}
+                                       onDelete={handleNoteOnDelete}
+                                       index={i}
+                                       ediding={i===noteTarget}
+                        />
                     )
                 }
             </S.Notes>

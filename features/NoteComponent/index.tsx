@@ -1,6 +1,6 @@
 import * as S from "./NoteComponent.styled"
 import {INote} from "../types";
-import {useEffect, useRef, useState} from "react";
+import {createRef, FormEvent, ReactNode, useEffect, useRef, useState} from "react";
 import {useInterval} from "../useInterval";
 import TimeToggle from "../TimeToggle";
 
@@ -10,6 +10,7 @@ interface NoteComponentProps {
     onChange: (note: INote) => void
     onDelete: (id: string) => void
     index: number
+    ediding:boolean
 }
 
 function getTotalTime(active:boolean,lastUpdated:number,timeSpend:number) {
@@ -18,20 +19,26 @@ function getTotalTime(active:boolean,lastUpdated:number,timeSpend:number) {
     return active? timeSpend + (currentTime - lastUpdated) : timeSpend
 }
 
-const NoteComponent = ({note, onChange, onDelete, index}: NoteComponentProps) => {
+const NoteComponent = ({note, onChange, onDelete, index, ediding}: NoteComponentProps) => {
     const [text, setText] = useState(note.text)
     const [active, setActive] = useState(note.active)
     const [timeSpendPreviously, setTimeSpendPreviously] = useState(note.timeSpend)
     const [lastUpdatedTimeSpend, setLastUpdatedTimeSpend] = useState(note.lastUpdatedTimeSpend)
     const [comment, setComment] = useState(false)
     const [totalTime, setTotalTime] = useState(getTotalTime(note.active,note.lastUpdatedTimeSpend,note.timeSpend))
+    const inputRef = createRef<HTMLInputElement>();
 
-    function handleTextOnChange(changeEvent: any) {
+    function handleTextOnChange(changeEvent: FormEvent<HTMLInputElement>) {
         setText(changeEvent.currentTarget.value)
         let tempNote = note
         tempNote.text = changeEvent.currentTarget.value
         onChange(tempNote)
     }
+
+    useEffect(()=>{
+        if(ediding && !!inputRef) inputRef.current?.focus()
+    },[inputRef,ediding])
+
 
     useEffect(() => {
         const commentRegex = /^\/\/|^#/gm;
@@ -81,13 +88,17 @@ const NoteComponent = ({note, onChange, onDelete, index}: NoteComponentProps) =>
         onDelete(note.id)
     }
 
+    function handleTextKeyPress(e:any) {
+        console.log(e)
+    }
+
     return (
         <S.Wrapper>
             <S.LineNumber>
                 {index}
             </S.LineNumber>
             <S.InputWrapper>
-                <S.Input value={text} onChange={handleTextOnChange} comment={comment}/>
+                <S.Input value={text} onKeyPress={handleTextKeyPress} onChange={handleTextOnChange} comment={comment} ref={inputRef}/>
             </S.InputWrapper>
             <S.RightContent>
                 {!comment &&

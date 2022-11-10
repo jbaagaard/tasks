@@ -1,28 +1,37 @@
 import * as S from "./Dashboard.styled"
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import DayPicker from "../DayPicker";
 import Day from "../Day";
 
-interface DashboardProps{
+interface DashboardProps {
 
 }
-const Dashboard = ({}:DashboardProps) => {
-    const [date, setDate] = useState(new Date())
 
-    function handleDatePickerOnChange(date:Date) {
+const Dashboard = ({}: DashboardProps) => {
+    const [date, setDate] = useState(new Date())
+    const [initialized, setInitialized] = useState(false)
+
+    useEffect(() => {
+        console.log("dashboard")
+        setInitialized(true)
+    }, [])
+
+    function handleDatePickerOnChange(date: Date) {
         setDate(date)
     }
 
     return (
-        <S.Wrapper>
-            <S.Header>
-                <S.HeaderContent>
-                    <DayPicker value={date} onChange={handleDatePickerOnChange}/>
+        initialized ?
+            <S.Wrapper>
+                <S.Header>
+                    <S.HeaderContent>
+                        <DayPicker value={date} onChange={handleDatePickerOnChange}/>
 
-                </S.HeaderContent>
-            </S.Header>
-            <Day day={date}/>
-        </S.Wrapper>
+                    </S.HeaderContent>
+                </S.Header>
+                <Day day={date}/>
+            </S.Wrapper> : null
+
     )
 }
 

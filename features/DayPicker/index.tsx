@@ -18,7 +18,7 @@ const DayPicker = ({value,onChange}:DayPickerProps) => {
     return (
         <S.Wrapper>
             <S.Button onClick={HandlePrewOnClick}>{"< Prew"}</S.Button>
-            <S.Text>{value.getFullYear()+"-"+value.getMonth()+"/"+value.getDate()}</S.Text>
+            <S.Text>{value.getFullYear()+"-"+(value.getMonth()+1)+"/"+value.getDate()}</S.Text>
             <S.Button onClick={handleNextOnClick}>{"Next >"}</S.Button>
         </S.Wrapper>
     )

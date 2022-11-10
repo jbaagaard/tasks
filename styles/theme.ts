@@ -4,6 +4,7 @@ interface Theme {
     bgLight: string,
     text: string,
     textSubtle: string,
+    textSubtler: string,
     red: string,
     redText: string,
     yellowText: string,
@@ -18,6 +19,7 @@ export const dark: Theme = {
     bgLight: "#282828",
     text: "#d4be98",
     textSubtle: "#897f73",
+    textSubtler: "#897f73",
     green: "#a9b665",
     greenText: "white",
     red: "#ea6962",
@@ -35,6 +37,7 @@ export const eightOOEight: Theme = {
     bgLight: "#464f5d",
     text: "#939eae",
     textSubtle: "#666e7a",
+    textSubtler: "#4b525d",
     green: "#50d886",
     red: "#f44c7f",
     yellow: "#f4cd4c"

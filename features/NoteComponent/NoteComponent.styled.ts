@@ -33,7 +33,7 @@ export const LineNumber = styled.div`
   color: ${props => props.theme.textSubtle};
   line-height: ${lineHeight};
   width: 38px;
-  border-right: 2px solid ${props => props.theme.textSubtle};
+  border-right: 2px solid ${props => props.theme.textSubtler};
 `
 
 export const InputWrapper = styled.div`

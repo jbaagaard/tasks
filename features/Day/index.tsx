@@ -10,6 +10,7 @@ interface DayProps {
 
 const Day = ({day}: DayProps) => {
     const [block, setBlock] = useState<INoteBlock | undefined>()
+    console.log("day")
     useEffect(() => {
         (async () => {
             const res = await loadBlock(day);
@@ -23,7 +24,7 @@ const Day = ({day}: DayProps) => {
 
     return (
         <S.Wrapper>
-            {block &&
+            {!!block &&
                 <NoteBlock noteBlock={block}/>
             }
         </S.Wrapper>
