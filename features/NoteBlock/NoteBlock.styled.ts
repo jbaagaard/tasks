@@ -13,12 +13,15 @@ gap: 16px;
 export const Notes = styled.div`
     display: flex;
   flex-direction: column;
+  padding-right: 8px;
 `
 
 export const AddNoteButtonWrapper = styled.div`
   width: 100%;
-  padding-left: 250px;
+  max-width: 800px;
   box-sizing: border-box;
+  display: flex;
+  justify-content: center;
 `
 
 export const AddNoteButton = styled(SecondaryButton)`
