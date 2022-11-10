@@ -12,14 +12,19 @@ interface NoteComponentProps {
     index: number
 }
 
+function getTotalTime(active:boolean,lastUpdated:number,timeSpend:number) {
+    const currentTime = new Date().getTime()
+
+    return active? timeSpend + (currentTime - lastUpdated) : timeSpend
+}
+
 const NoteComponent = ({note, onChange, onDelete, index}: NoteComponentProps) => {
     const [text, setText] = useState(note.text)
     const [active, setActive] = useState(note.active)
-    const [time, setTime] = useState(note.timeSpend)
+    const [timeSpendPreviously, setTimeSpendPreviously] = useState(note.timeSpend)
     const [lastUpdatedTimeSpend, setLastUpdatedTimeSpend] = useState(note.lastUpdatedTimeSpend)
     const [comment, setComment] = useState(false)
-
-    // const [hide,setHide] = useState(true)
+    const [totalTime, setTotalTime] = useState(getTotalTime(note.active,note.lastUpdatedTimeSpend,note.timeSpend))
 
     function handleTextOnChange(changeEvent: any) {
         setText(changeEvent.currentTarget.value)
@@ -44,20 +49,31 @@ const NoteComponent = ({note, onChange, onDelete, index}: NoteComponentProps) =>
 
     function tick() {
         if (!active) return
-        let tempNote = note
-        const currentTime = new Date().getTime()
-        tempNote.timeSpend += (currentTime - lastUpdatedTimeSpend)
-        tempNote.lastUpdatedTimeSpend = currentTime
-        setLastUpdatedTimeSpend(currentTime)
-        onChange(tempNote)
-        setTime(tempNote.timeSpend)
+            setTotalTime(getTotalTime(active,lastUpdatedTimeSpend,timeSpendPreviously))
     }
 
     function handleStartButtonOnClick(value: boolean) {
-        if (!active) setLastUpdatedTimeSpend(new Date().getTime())
         let tempNote = note
-        tempNote.active = !active
-        setActive(active => !active)
+
+        if (value) {
+            //start timer
+            const currentTime = new Date().getTime()
+            setLastUpdatedTimeSpend(new Date().getTime())
+            tempNote.lastUpdatedTimeSpend = currentTime
+            tick();
+        }
+        else
+        {
+            //pause timer
+            const currentTime = new Date().getTime()
+            const tempTotalTime = timeSpendPreviously+((currentTime - lastUpdatedTimeSpend))
+            setTimeSpendPreviously(tempTotalTime)
+            setLastUpdatedTimeSpend(currentTime)
+            tempNote.timeSpend = tempTotalTime
+            tempNote.lastUpdatedTimeSpend = currentTime
+        }
+        tempNote.active = value
+        setActive(value)
         onChange(tempNote);
     }
 
@@ -76,7 +92,7 @@ const NoteComponent = ({note, onChange, onDelete, index}: NoteComponentProps) =>
             <S.RightContent>
                 {!comment &&
                     <>
-                        <TimeToggle time={time} value={active} onChange={handleStartButtonOnClick}/>
+                        <TimeToggle time={totalTime} value={active} onChange={handleStartButtonOnClick}/>
                         <S.DataWrapper>
                         </S.DataWrapper>
                     </>
