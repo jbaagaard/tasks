@@ -11,7 +11,6 @@ interface DayProps {
 
 const Day = ({day}: DayProps) => {
     const [block, setBlock] = useState<INoteBlock | undefined>()
-    console.log("day")
     useEffect(() => {
         (async () => {
             const res = await loadBlock(day);

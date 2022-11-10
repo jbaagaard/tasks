@@ -18,7 +18,6 @@ const NoteBLock = ({noteBlock}: NoteBlockProps) => {
     }, [noteBlock])
 
     useEffect(()=>{
-        console.log("draw")
         document.addEventListener("keydown",e=>console.log(e))
 
         return () => {

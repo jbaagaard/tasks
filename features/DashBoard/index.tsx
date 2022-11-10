@@ -12,7 +12,6 @@ const Dashboard = ({}: DashboardProps) => {
     const [initialized, setInitialized] = useState(false)
 
     useEffect(() => {
-        console.log("dashboard")
         setInitialized(true)
     }, [])
 
