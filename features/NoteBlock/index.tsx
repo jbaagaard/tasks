@@ -4,6 +4,7 @@ import NoteComponent from "../NoteComponent";
 import {saveBlock} from "../api";
 import {emptyNote} from "../noteUtils";
 import {INote, INoteBlock} from "../types";
+import {number} from "prop-types";
 
 interface NoteBlockProps {
     noteBlock: INoteBlock
@@ -17,13 +18,29 @@ const NoteBLock = ({noteBlock}: NoteBlockProps) => {
         setNotes(noteBlock.notes)
     }, [noteBlock])
 
-    useEffect(()=>{
-        document.addEventListener("keydown",e=>console.log(e))
+    useEffect(() => {
+        if (noteTarget < 0) setNoteTarget(0)
+        if (noteTarget >= notes.length) setNoteTarget(notes.length - 1)
+    }, [noteTarget])
+
+    function handleEventKeydown(e: KeyboardEvent) {
+        console.log(noteTarget)
+        if (e.code === "ArrowDown") {
+            setNoteTarget(nt => nt + 1)
+        } else if (e.code === "ArrowUp") {
+            setNoteTarget(nt => nt - 1)
+        }
+        
+
+    }
+
+    useEffect(() => {
+        document.addEventListener("keydown", handleEventKeydown)
 
         return () => {
-            document.removeEventListener("keydown",e=>console.log(e))
+            document.removeEventListener("keydown", handleEventKeydown)
         }
-    },[])
+    }, [])
 
 
     function handleNoteComponentOnChange(note: INote) {
@@ -42,6 +59,12 @@ const NoteBLock = ({noteBlock}: NoteBlockProps) => {
         setNotes(notes => [...notes, newNote])
     }
 
+    function insetNote(index:number) {
+        const newNote: INote = emptyNote()
+        let tempNotes = notes
+        tempNotes.splice(index,0,newNote)
+        setNotes(tempNotes);
+    }
     async function save(notes: INote[]) {
         let saveData = noteBlock
         noteBlock.notes = notes
@@ -54,6 +77,9 @@ const NoteBLock = ({noteBlock}: NoteBlockProps) => {
         setNotes(tempNotes)
     }
 
+    function handleNoteComponentOnActive(index: number) {
+        setNoteTarget(index)
+    }
 
     return (
         <S.Wrapper>
@@ -65,7 +91,8 @@ const NoteBLock = ({noteBlock}: NoteBlockProps) => {
                                        onChange={handleNoteComponentOnChange}
                                        onDelete={handleNoteOnDelete}
                                        index={i}
-                                       ediding={i===noteTarget}
+                                       ediding={i === noteTarget}
+                                       onActive={handleNoteComponentOnActive}
                         />
                     )
                 }

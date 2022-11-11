@@ -5,21 +5,22 @@ import {useInterval} from "../useInterval";
 import TimeToggle from "../TimeToggle";
 
 
-interface NoteComponentProps {
-    note: INote
-    onChange: (note: INote) => void
-    onDelete: (id: string) => void
-    index: number
-    ediding:boolean
-}
-
 function getTotalTime(active:boolean,lastUpdated:number,timeSpend:number) {
     const currentTime = new Date().getTime()
 
     return active? timeSpend + (currentTime - lastUpdated) : timeSpend
 }
 
-const NoteComponent = ({note, onChange, onDelete, index, ediding}: NoteComponentProps) => {
+interface NoteComponentProps {
+    note: INote
+    onChange: (note: INote) => void
+    onDelete: (id: string) => void
+    index: number
+    ediding:boolean
+    onActive:(index:number)=>void
+}
+
+const NoteComponent = ({note, onChange, onDelete, index, ediding,onActive}: NoteComponentProps) => {
     const [text, setText] = useState(note.text)
     const [active, setActive] = useState(note.active)
     const [timeSpendPreviously, setTimeSpendPreviously] = useState(note.timeSpend)
@@ -88,8 +89,9 @@ const NoteComponent = ({note, onChange, onDelete, index, ediding}: NoteComponent
         onDelete(note.id)
     }
 
-    function handleTextKeyPress(e:any) {
-        console.log(e)
+
+    function handeTextOnFocus() {
+        onActive(index)
     }
 
     return (
@@ -98,7 +100,7 @@ const NoteComponent = ({note, onChange, onDelete, index, ediding}: NoteComponent
                 {index}
             </S.LineNumber>
             <S.InputWrapper>
-                <S.Input value={text} onKeyPress={handleTextKeyPress} onChange={handleTextOnChange} comment={comment} ref={inputRef}/>
+                <S.Input value={text}  onChange={handleTextOnChange} comment={comment} ref={inputRef} onFocus={handeTextOnFocus}/>
             </S.InputWrapper>
             <S.RightContent>
                 {!comment &&
