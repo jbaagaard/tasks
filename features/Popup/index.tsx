@@ -17,8 +17,8 @@ interface PopupProps {
 const Popup = ({ onCancel, children }: PopupProps) => {
   return (
     <PopupPortal>
-      <S.Wrapper onClick={onCancel}>
-        <S.Popup onClick={(event) => event.stopPropagation()}>
+      <S.Wrapper onMouseDown={onCancel}>
+        <S.Popup onMouseDown={(event) => event.stopPropagation()}>
           {children}
         </S.Popup>
       </S.Wrapper>

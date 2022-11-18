@@ -115,6 +115,14 @@ const NoteComponent = ({
     onActive(index);
   }
 
+  function handleOnTimeChange(time: number) {
+    setTimeSpendPreviously(time);
+    setTotalTime(time);
+    let tempNote = note;
+    tempNote.timeSpend = time;
+    onChange(tempNote);
+  }
+
   return (
     <S.Wrapper>
       <S.LineNumber>{index}</S.LineNumber>
@@ -134,6 +142,7 @@ const NoteComponent = ({
               time={totalTime}
               value={active}
               onChange={handleStartButtonOnClick}
+              onTimeChange={handleOnTimeChange}
             />
             <S.DataWrapper></S.DataWrapper>
           </>

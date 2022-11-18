@@ -13,9 +13,15 @@ interface TimeToggleProps {
   time: number;
   value: boolean;
   onChange: (value: boolean) => void;
+  onTimeChange: (time: number) => void;
 }
 
-const TimeToggle = ({ onChange, time, value }: TimeToggleProps) => {
+const TimeToggle = ({
+  onChange,
+  time,
+  value,
+  onTimeChange,
+}: TimeToggleProps) => {
   const [editing, setEdiding] = useState(false);
 
   function handleOnClick() {
@@ -23,6 +29,7 @@ const TimeToggle = ({ onChange, time, value }: TimeToggleProps) => {
   }
 
   function handleTimeChangerOnAccept(time: number) {
+    onTimeChange(time);
     setEdiding(false);
   }
 

@@ -27,6 +27,7 @@ interface TimeChangerProps {
   onAccept: (value: number) => void;
   onCancel: () => void;
 }
+
 const TimeChanger = ({ value, onAccept, onCancel }: TimeChangerProps) => {
   const [type, setType] = useState(getTimeType(value));
   const [time, setTime] = useState(formatTime(value));
@@ -47,12 +48,14 @@ const TimeChanger = ({ value, onAccept, onCancel }: TimeChangerProps) => {
   return (
     <Popup onCancel={onCancel}>
       <S.Wrapper>
-        <S.Time value={time} onChange={handleTimeOnChange} />
-        <S.TypeSelect onChange={handleSelectOnChange}>
-          <S.TypeOption value={"s"}>s</S.TypeOption>
-          <S.TypeOption value={"m"}>m</S.TypeOption>
-          <S.TypeOption value={"h"}>h</S.TypeOption>
-        </S.TypeSelect>
+        <S.TimeWrapper>
+          <S.Time value={time} onChange={handleTimeOnChange} />
+          <S.TypeSelect onChange={handleSelectOnChange}>
+            <S.TypeOption value={"s"}>s</S.TypeOption>
+            <S.TypeOption value={"m"}>m</S.TypeOption>
+            <S.TypeOption value={"h"}>h</S.TypeOption>
+          </S.TypeSelect>
+        </S.TimeWrapper>
         <S.AcceptButton onClick={handleAcceptOnClick}>set</S.AcceptButton>
       </S.Wrapper>
     </Popup>
