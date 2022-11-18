@@ -1,27 +1,31 @@
-import * as S from "./DayPicker.styled"
+import * as S from "./DayPicker.styled";
 
-interface DayPickerProps{
-    value:Date
-    onChange:(date:Date)=>void
+interface DayPickerProps {
+  value: Date;
+  onChange: (date: Date) => void;
 }
-const DayPicker = ({value,onChange}:DayPickerProps) => {
+const DayPicker = ({ value, onChange }: DayPickerProps) => {
+  function HandlePrewOnClick() {
+    onChange(new Date(new Date(value.getTime()).setDate(value.getDate() - 1)));
+  }
 
-    function HandlePrewOnClick() {
-        onChange(new Date(new Date(value.getTime()).setDate(value.getDate()-1)))
-    }
+  function handleNextOnClick() {
+    onChange(new Date(new Date(value.getTime()).setDate(value.getDate() + 1)));
+  }
 
-    function handleNextOnClick() {
-        onChange(new Date(new Date(value.getTime()).setDate(value.getDate()+1)))
+  return (
+    <S.Wrapper>
+      <S.Button onClick={HandlePrewOnClick}>{"< Prew"}</S.Button>
+      <S.Text>
+        {value.getFullYear() +
+          "-" +
+          (value.getMonth() + 1) +
+          "/" +
+          value.getDate()}
+      </S.Text>
+      <S.Button onClick={handleNextOnClick}>{"Next >"}</S.Button>
+    </S.Wrapper>
+  );
+};
 
-    }
-
-    return (
-        <S.Wrapper>
-            <S.Button onClick={HandlePrewOnClick}>{"< Prew"}</S.Button>
-            <S.Text>{value.getFullYear()+"-"+(value.getMonth()+1)+"/"+value.getDate()}</S.Text>
-            <S.Button onClick={handleNextOnClick}>{"Next >"}</S.Button>
-        </S.Wrapper>
-    )
-}
-
-export default DayPicker
+export default DayPicker;
