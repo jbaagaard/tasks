@@ -1,5 +1,6 @@
 import * as S from "./TimeChanger.styled";
 import { ChangeEvent, useState } from "react";
+import Popup from "../Popup";
 
 function getTimeType(time: number) {
   let seconds = time / 1000;
@@ -44,15 +45,17 @@ const TimeChanger = ({ value, onAccept, onCancel }: TimeChangerProps) => {
   }
 
   return (
-    <S.Wrapper>
-      <S.Time value={time} onChange={handleTimeOnChange} />
-      <S.TypeSelect onChange={handleSelectOnChange}>
-        <S.TypeOption value={"s"}>s</S.TypeOption>
-        <S.TypeOption value={"m"}>m</S.TypeOption>
-        <S.TypeOption value={"h"}>h</S.TypeOption>
-      </S.TypeSelect>
-      <S.AcceptButton onClick={handleAcceptOnClick}>set</S.AcceptButton>
-    </S.Wrapper>
+    <Popup onCancel={onCancel}>
+      <S.Wrapper>
+        <S.Time value={time} onChange={handleTimeOnChange} />
+        <S.TypeSelect onChange={handleSelectOnChange}>
+          <S.TypeOption value={"s"}>s</S.TypeOption>
+          <S.TypeOption value={"m"}>m</S.TypeOption>
+          <S.TypeOption value={"h"}>h</S.TypeOption>
+        </S.TypeSelect>
+        <S.AcceptButton onClick={handleAcceptOnClick}>set</S.AcceptButton>
+      </S.Wrapper>
+    </Popup>
   );
 };
 
