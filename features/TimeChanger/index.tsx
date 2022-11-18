@@ -19,7 +19,7 @@ function formatTime(time: number) {
 function calculateTime(time: number, type: string) {
   if (type === "s") return time * 1000;
   else if (type === "m") return time * 60000;
-  else return time * 36000000;
+  else return time * 3600000;
 }
 
 interface TimeChangerProps {
