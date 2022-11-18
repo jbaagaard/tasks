@@ -1,25 +1,25 @@
-export type Status = "Not Started" | "In Progress" | "Done"
+export type Status = "Not Started" | "In Progress" | "Done";
 
 export interface INoteBlock {
-    id: string
-    date: Date
-    notes: INote[]
+  id: string;
+  date: Date;
+  notes: INote[];
 }
 
 export interface JSONINoteBlock extends Omit<INoteBlock, "date"> {
-    date: string
+  date: string;
 }
 
 export interface INote {
-    id: string
-    text: string
-    data: string
-    timeSpend: number
-    completion: Status
-    active: boolean
-    lastUpdatedTimeSpend: number
+  id: string;
+  text: string;
+  data: string;
+  timeSpend: number;
+  completion: Status;
+  active: boolean;
+  lastUpdatedTimeSpend: number;
 }
 
 export interface JSONINote extends Omit<INote, "lastUpdatedTimeSpend"> {
-    lastUpdatedTimeSpend: string
+  lastUpdatedTimeSpend: string;
 }
