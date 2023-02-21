@@ -3,13 +3,14 @@ import { useEffect, useState } from "react";
 import NoteComponent from "../NoteComponent";
 import { saveBlock } from "../api";
 import { emptyNote } from "../noteUtils";
-import { INote, INoteBlock } from "../types";
+import { BlockType, INote, INoteBlock } from "../types";
 
 interface NoteBlockProps {
   noteBlock: INoteBlock;
+  blockType: BlockType;
 }
 
-const NoteBLock = ({ noteBlock }: NoteBlockProps) => {
+const NoteBLock = ({ noteBlock, blockType }: NoteBlockProps) => {
   const [notes, setNotes] = useState<INote[]>(noteBlock.notes);
   const [noteTarget, setNoteTarget] = useState(0);
 
@@ -65,7 +66,7 @@ const NoteBLock = ({ noteBlock }: NoteBlockProps) => {
   async function save(notes: INote[]) {
     let saveData = noteBlock;
     noteBlock.notes = notes;
-    await saveBlock(saveData);
+    await saveBlock(saveData, blockType);
   }
 
   function handleNoteOnDelete(id: string) {

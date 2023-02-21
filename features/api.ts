@@ -1,29 +1,35 @@
-import { INoteBlock, JSONINoteBlock } from "./types";
+import { BlockType, INoteBlock, JSONINoteBlock } from "./types";
 import { convertJSONINoteBLock } from "./noteUtils";
 
-const v = "3";
+const v = "4";
 
 function dateToDaySignature(date: Date) {
   return date.getFullYear() + "-" + date.getMonth() + "/" + date.getDate();
 }
 
-export async function saveBlock(noteBlock: INoteBlock) {
-  if (noteBlock.id === "global")
-    window.localStorage.setItem("block: global", JSON.stringify(noteBlock));
+export async function saveBlock(noteBlock: INoteBlock, type: BlockType) {
+  if (type === "global" || type === "template")
+    window.localStorage.setItem(type + ":", JSON.stringify(noteBlock));
   else
     window.localStorage.setItem(
-      "block:" + dateToDaySignature(noteBlock.date),
+      type + ":" + dateToDaySignature(noteBlock.date),
       JSON.stringify(noteBlock)
     );
   window.localStorage.setItem("v", v);
 }
 
-export async function loadBlock(date: Date) {
+export async function loadBlock(date: Date, prefix: BlockType) {
   if (window.localStorage.getItem("v") !== v) {
-    window.localStorage.removeItem("block:" + dateToDaySignature(date));
+    window.localStorage.removeItem(prefix + ":" + dateToDaySignature(date));
     return;
   }
-  let res = window.localStorage.getItem("block:" + dateToDaySignature(date));
+  let res;
+
+  if (prefix === "global" || prefix === "template")
+    res = window.localStorage.getItem(prefix + ":");
+  else
+    res = window.localStorage.getItem(prefix + ":" + dateToDaySignature(date));
+
   if (!!res) {
     let parsedRes = JSON.parse(res) as JSONINoteBlock;
     return convertJSONINoteBLock(parsedRes);

@@ -1,0 +1,35 @@
+import * as S from "./NoteBlockRenderer.styled";
+import { useEffect, useState } from "react";
+import { loadBlock } from "../api";
+import { BlockType, INoteBlock } from "../types";
+import NoteBlock from "../NoteBlock";
+import { newNoteBlock } from "../noteUtils";
+
+interface DayProps {
+  day: Date;
+  type: BlockType;
+}
+
+const NoteBlockRenderer = ({ day, type }: DayProps) => {
+  const [block, setBlock] = useState<INoteBlock | undefined>();
+  useEffect(() => {
+    (async () => {
+      const res = await loadBlock(day, type);
+      console.log(res);
+      if (!!res) setBlock(res);
+      else {
+        const template = await loadBlock(day, "template");
+        if (!!template) setBlock(template);
+        else setBlock(newNoteBlock(day));
+      }
+    })();
+  }, [day, type]);
+
+  return (
+    <S.Wrapper>
+      {!!block && <NoteBlock noteBlock={block} blockType={type} />}
+    </S.Wrapper>
+  );
+};
+
+export default NoteBlockRenderer;
