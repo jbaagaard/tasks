@@ -91,6 +91,7 @@ const NoteBLock = ({ noteBlock, blockType }: NoteBlockProps) => {
             index={i}
             ediding={i === noteTarget}
             onActive={handleNoteComponentOnActive}
+            blockType={blockType}
           />
         ))}
       </S.Notes>

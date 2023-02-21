@@ -1,5 +1,5 @@
 import * as S from "./NoteComponent.styled";
-import { INote } from "../types";
+import { BlockType, INote } from "../types";
 import {
   createRef,
   FormEvent,
@@ -24,6 +24,7 @@ interface NoteComponentProps {
   index: number;
   ediding: boolean;
   onActive: (index: number) => void;
+  blockType: BlockType;
 }
 
 const NoteComponent = ({
@@ -33,6 +34,7 @@ const NoteComponent = ({
   index,
   ediding,
   onActive,
+  blockType,
 }: NoteComponentProps) => {
   const [text, setText] = useState(note.text);
   const [active, setActive] = useState(note.active);
@@ -136,7 +138,7 @@ const NoteComponent = ({
         />
       </S.InputWrapper>
       <S.RightContent>
-        {!comment && (
+        {!comment && blockType !== "template" && (
           <>
             <TimeToggle
               time={totalTime}
