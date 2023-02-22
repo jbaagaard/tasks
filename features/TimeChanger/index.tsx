@@ -7,6 +7,7 @@ function formatTime(time: number) {
 }
 
 function calculateTime(time: number) {
+  if (isNaN(time)) return 0;
   return time * 60000;
 }
 
@@ -20,7 +21,8 @@ const TimeChanger = ({ value, onAccept, onCancel }: TimeChangerProps) => {
   const [time, setTime] = useState<number | string>(formatTime(value));
 
   function handleTimeOnChange(e: ChangeEvent<HTMLInputElement>) {
-    setTime(e.currentTarget.value);
+    const value = e.currentTarget.value.replace(/[^0-9.,]/g, "");
+    setTime(value);
   }
 
   function handleAcceptOnClick() {
