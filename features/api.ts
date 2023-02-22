@@ -19,6 +19,7 @@ export async function saveBlock(noteBlock: INoteBlock, type: BlockType) {
 }
 
 export async function loadBlock(date: Date, prefix: BlockType) {
+  //await wait(50);
   if (window.localStorage.getItem("v") !== v) {
     window.localStorage.removeItem(prefix + ":" + dateToDaySignature(date));
     return;
@@ -34,4 +35,9 @@ export async function loadBlock(date: Date, prefix: BlockType) {
     let parsedRes = JSON.parse(res) as JSONINoteBlock;
     return convertJSONINoteBLock(parsedRes);
   }
+}
+
+export async function wait(ms: number) {
+  await new Promise((resolve) => setTimeout(resolve, ms));
+  return;
 }

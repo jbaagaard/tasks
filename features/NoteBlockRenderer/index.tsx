@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { loadBlock } from "../api";
 import { BlockType, INoteBlock } from "../types";
 import NoteBlock from "../NoteBlock";
-import { newNoteBlock } from "../noteUtils";
+import { convertTemplate, newNoteBlock } from "../noteUtils";
 
 interface DayProps {
   day: Date;
@@ -14,12 +14,12 @@ const NoteBlockRenderer = ({ day, type }: DayProps) => {
   const [block, setBlock] = useState<INoteBlock | undefined>();
   useEffect(() => {
     (async () => {
+      setBlock(undefined);
       const res = await loadBlock(day, type);
-      console.log(res);
       if (!!res) setBlock(res);
       else {
         const template = await loadBlock(day, "template");
-        if (!!template) setBlock(template);
+        if (!!template && type === "daily") setBlock(convertTemplate(template));
         else setBlock(newNoteBlock(day));
       }
     })();

@@ -1,4 +1,5 @@
-import { INote, INoteBlock, JSONINote, JSONINoteBlock } from "./types";
+import { INote, INoteBlock, JSONINote, JSONINoteBlock, Status } from "./types";
+import NoteBlock from "./NoteBlock";
 
 export function emptyNote(text?: string): INote {
   return {
@@ -9,6 +10,22 @@ export function emptyNote(text?: string): INote {
     completion: "Not Started",
     text: text ? text : "",
     active: false,
+  };
+}
+
+export function convertTemplate(template: INoteBlock): INoteBlock {
+  return {
+    date: template.date,
+    id: newId(),
+    notes: template.notes.map((n) => ({
+      id: newId(),
+      text: n.text,
+      data: n.data,
+      timeSpend: n.timeSpend,
+      completion: n.completion,
+      active: n.active,
+      lastUpdatedTimeSpend: n.lastUpdatedTimeSpend,
+    })),
   };
 }
 
@@ -48,4 +65,8 @@ export function convertJSONINoteBLock(
     id: JSONNodeBlock.id,
     notes: notes,
   };
+}
+
+function newId() {
+  return Math.random() + "" + Math.random();
 }

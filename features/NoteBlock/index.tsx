@@ -53,7 +53,9 @@ const NoteBLock = ({ noteBlock, blockType }: NoteBlockProps) => {
 
   function addNote() {
     const newNote: INote = emptyNote();
-    setNotes((notes) => [...notes, newNote]);
+    const tempNotes = [...notes, newNote];
+    setNotes(tempNotes);
+    save(tempNotes);
   }
 
   function insetNote(index: number) {
