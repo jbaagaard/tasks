@@ -19,7 +19,8 @@ const NoteBlockRenderer = ({ day, type }: DayProps) => {
       if (!!res) setBlock(res);
       else {
         const template = await loadBlock(day, "template");
-        if (!!template && type === "daily") setBlock(convertTemplate(template));
+        if (!!template && type === "daily")
+          setBlock(convertTemplate(template, day));
         else setBlock(newNoteBlock(day));
       }
     })();

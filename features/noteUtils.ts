@@ -13,9 +13,9 @@ export function emptyNote(text?: string): INote {
   };
 }
 
-export function convertTemplate(template: INoteBlock): INoteBlock {
+export function convertTemplate(template: INoteBlock, date: Date): INoteBlock {
   return {
-    date: template.date,
+    date: date,
     id: newId(),
     notes: template.notes.map((n) => ({
       id: newId(),
