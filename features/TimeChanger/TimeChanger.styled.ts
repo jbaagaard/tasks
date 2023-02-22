@@ -27,15 +27,15 @@ export const Time = styled.input`
   text-align: right;
 `;
 
-export const TypeSelect = styled.select`
+export const TypeSelect = styled.div`
   border: none;
-  font-size: 16px;
+  line-height: 33px;
+  font-size: 18px;
   color: ${(props) => props.theme.text};
   border-left: 2px solid ${(props) => props.theme.text};
   background-color: ${(props) => props.theme.bgDark};
   box-sizing: border-box;
   padding: 0 10px;
-  cursor: pointer;
   :focus {
     outline: none;
   }
