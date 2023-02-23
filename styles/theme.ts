@@ -46,7 +46,7 @@ export const eightOOEight: Theme = {
 export const hanok: Theme = {
   bg: "#d8d2c3",
   bgDark: "#c2bcac",
-  bgLight: "#b0aa98",
+  bgLight: "#e5decc",
   green: "#aad295",
   greenText: "#8b6f5c",
   red: "#d29595",
