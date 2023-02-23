@@ -43,6 +43,21 @@ export const eightOOEight: Theme = {
   yellow: "#f4cd4c",
 };
 
+export const hanok: Theme = {
+  bg: "#d8d2c3",
+  bgDark: "#c2bcac",
+  bgLight: "#b0aa98",
+  green: "#aad295",
+  greenText: "#8b6f5c",
+  red: "#d29595",
+  redText: "#8b6f5c",
+  text: "#8b6f5c",
+  textSubtle: "#b18d75",
+  textSubtler: "#d7ab8e",
+  yellow: "#d2cf95",
+  yellowText: "#8b6f5c",
+};
+
 export interface Themes {
   [key: string]: Theme;
 }
@@ -50,4 +65,5 @@ export interface Themes {
 export const themes: Themes = {
   eightOOEight: eightOOEight,
   train: train,
+  hanok: hanok,
 };
