@@ -1,9 +1,10 @@
 import * as S from "./NoteBlock.styled";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import NoteComponent from "../NoteComponent";
 import { saveBlock } from "../api";
 import { emptyNote } from "../noteUtils";
 import { BlockType, INote, INoteBlock } from "../types";
+import { NoteBlockContext } from "../NoteBlockContext";
 
 interface NoteBlockProps {
   noteBlock: INoteBlock;
@@ -11,24 +12,26 @@ interface NoteBlockProps {
 }
 
 const NoteBLock = ({ noteBlock, blockType }: NoteBlockProps) => {
-  const [notes, setNotes] = useState<INote[]>(noteBlock.notes);
-  const [noteTarget, setNoteTarget] = useState(0);
-
+  const { notes, setNotes, focusIndex, setFocusIndex } =
+    useContext(NoteBlockContext);
   useEffect(() => {
     setNotes(noteBlock.notes);
   }, [noteBlock]);
 
   useEffect(() => {
-    if (noteTarget < 0) setNoteTarget(0);
-    if (noteTarget >= notes.length) setNoteTarget(notes.length - 1);
-  }, [noteTarget]);
+    if (focusIndex < 0) setFocusIndex(0);
+    if (focusIndex >= notes.length) setFocusIndex(notes.length - 1);
+  }, [focusIndex]);
 
   function handleEventKeydown(e: KeyboardEvent) {
-    console.log(noteTarget);
+    console.log(focusIndex);
     if (e.code === "ArrowDown") {
-      setNoteTarget((nt) => nt + 1);
+      setFocusIndex(focusIndex + 1);
     } else if (e.code === "ArrowUp") {
-      setNoteTarget((nt) => nt - 1);
+      setFocusIndex(focusIndex - 1);
+    } else if (e.code === "Enter") {
+      insetNote(focusIndex + 1);
+      setFocusIndex(focusIndex + 1);
     }
   }
 
@@ -38,7 +41,7 @@ const NoteBLock = ({ noteBlock, blockType }: NoteBlockProps) => {
     return () => {
       document.removeEventListener("keydown", handleEventKeydown);
     };
-  }, []);
+  }, [focusIndex, notes]);
 
   function handleNoteComponentOnChange(note: INote) {
     const tempNotes = notes;
@@ -63,6 +66,7 @@ const NoteBLock = ({ noteBlock, blockType }: NoteBlockProps) => {
     let tempNotes = notes;
     tempNotes.splice(index, 0, newNote);
     setNotes(tempNotes);
+    save(tempNotes);
   }
 
   async function save(notes: INote[]) {
@@ -78,7 +82,7 @@ const NoteBLock = ({ noteBlock, blockType }: NoteBlockProps) => {
   }
 
   function handleNoteComponentOnActive(index: number) {
-    setNoteTarget(index);
+    setFocusIndex(index);
   }
 
   return (
@@ -91,7 +95,7 @@ const NoteBLock = ({ noteBlock, blockType }: NoteBlockProps) => {
             onChange={handleNoteComponentOnChange}
             onDelete={handleNoteOnDelete}
             index={i}
-            ediding={i === noteTarget}
+            ediding={i === focusIndex}
             onActive={handleNoteComponentOnActive}
             blockType={blockType}
           />

@@ -4,6 +4,7 @@ import { loadBlock } from "../api";
 import { BlockType, INoteBlock } from "../types";
 import NoteBlock from "../NoteBlock";
 import { convertTemplate, newNoteBlock } from "../noteUtils";
+import { NoteBlockContextProvider } from "../NoteBlockContext";
 
 interface DayProps {
   day: Date;
@@ -28,7 +29,11 @@ const NoteBlockRenderer = ({ day, type }: DayProps) => {
 
   return (
     <S.Wrapper>
-      {!!block && <NoteBlock noteBlock={block} blockType={type} />}
+      {!!block && (
+        <NoteBlockContextProvider noteBlock={block}>
+          <NoteBlock noteBlock={block} blockType={type} />
+        </NoteBlockContextProvider>
+      )}
     </S.Wrapper>
   );
 };
