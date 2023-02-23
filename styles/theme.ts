@@ -1,4 +1,4 @@
-interface Theme {
+export interface Theme {
   bg: string;
   bgDark: string;
   bgLight: string;
@@ -21,11 +21,11 @@ export const train: Theme = {
   textSubtle: "#897f73",
   textSubtler: "#897f73",
   green: "#a9b665",
-  greenText: "#d4be98",
+  greenText: "#1d2021",
   red: "#ea6962",
   redText: "#d4be98",
   yellow: "#d8a657",
-  yellowText: "#d4be98",
+  yellowText: "#1d2021",
 };
 
 export const eightOOEight: Theme = {
@@ -41,4 +41,13 @@ export const eightOOEight: Theme = {
   green: "#50d886",
   red: "#f44c7f",
   yellow: "#f4cd4c",
+};
+
+export interface Themes {
+  [key: string]: Theme;
+}
+
+export const themes: Themes = {
+  eightOOEight: eightOOEight,
+  train: train,
 };

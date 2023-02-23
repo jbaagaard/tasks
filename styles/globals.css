@@ -4,8 +4,6 @@ html,
 body,
 #__next {
   height: 100%;
-  background-color: #1d2021;
-  color: #d4be98;
 }
 
 * {
