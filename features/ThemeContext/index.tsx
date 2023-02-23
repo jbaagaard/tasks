@@ -1,5 +1,5 @@
 import { Theme, themes, Themes } from "../../styles/theme";
-import { createContext, ReactNode, useState } from "react";
+import { createContext, ReactNode, useEffect, useState } from "react";
 import { ThemeProvider } from "styled-components";
 
 interface ThemeContextProps {
@@ -17,11 +17,17 @@ interface ThemeContextProviderProps {
 export const ThemeContextProvider = ({
   children,
 }: ThemeContextProviderProps) => {
-  const [currentTheme, setCurrentTheme] = useState("eightOOEight");
+  const [currentTheme, setCurrentTheme] = useState<string>("eightOOEight");
+  useEffect(() => {
+    setCurrentTheme(localStorage.getItem("theme") || "eightOOEight");
+  }, []);
   const value: ThemeContextProps = {
     currentTheme: currentTheme,
     setTheme(theme: string): void {
-      setCurrentTheme(theme);
+      if (themes[theme]) {
+        setCurrentTheme(theme);
+        localStorage.setItem("theme", theme);
+      }
     },
     themes: themes,
   };

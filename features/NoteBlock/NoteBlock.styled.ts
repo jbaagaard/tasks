@@ -29,16 +29,3 @@ export const AddNoteButton = styled(SecondaryButton)`
   padding: 6px 32px;
   height: fit-content;
 `;
-
-export const Footer = styled.div`
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 24px;
-  font-size: 14px;
-  background-color: ${(props) => props.theme.text};
-  color: ${(props) => props.theme.bg};
-  padding-left: 8px;
-  line-height: 22px;
-`;

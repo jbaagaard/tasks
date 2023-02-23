@@ -5,6 +5,7 @@ import { saveBlock } from "../api";
 import { emptyNote, formatTime, getFormattedTimeFromNotes } from "../noteUtils";
 import { BlockType, INote, INoteBlock } from "../types";
 import { NoteBlockContext } from "../NoteBlockContext";
+import Footer from "../Footer";
 
 interface NoteBlockProps {
   noteBlock: INoteBlock;
@@ -106,10 +107,7 @@ const NoteBLock = ({ noteBlock, blockType }: NoteBlockProps) => {
           <S.AddNoteButton onClick={addNote}>+ Tilføj note</S.AddNoteButton>
         </S.AddNoteButtonWrapper>
       </S.Content>
-      <S.Footer>
-        {" "}
-        {` ${focusIndex} | Total time: ${getFormattedTimeFromNotes(notes)}`}
-      </S.Footer>
+      <Footer />
     </S.Wrapper>
   );
 };
