@@ -1,13 +1,7 @@
 import * as S from "./TimeToggle.styled";
 import { useState } from "react";
 import TimeChanger from "../TimeChanger";
-
-function formatTime(time: number) {
-  let seconds = time / 1000;
-  if (seconds < 60) return Math.floor(seconds) + "s";
-  else if (seconds < 3600) return Math.floor(seconds / 60) + "m";
-  else return Math.round(seconds / 360) / 10 + "h";
-}
+import { formatTime } from "../noteUtils";
 
 interface TimeToggleProps {
   time: number;

@@ -2,7 +2,7 @@ import * as S from "./NoteBlock.styled";
 import { useContext, useEffect, useState } from "react";
 import NoteComponent from "../NoteComponent";
 import { saveBlock } from "../api";
-import { emptyNote } from "../noteUtils";
+import { emptyNote, formatTime, getFormattedTimeFromNotes } from "../noteUtils";
 import { BlockType, INote, INoteBlock } from "../types";
 import { NoteBlockContext } from "../NoteBlockContext";
 
@@ -87,23 +87,29 @@ const NoteBLock = ({ noteBlock, blockType }: NoteBlockProps) => {
 
   return (
     <S.Wrapper>
-      <S.Notes>
-        {notes.map((n, i) => (
-          <NoteComponent
-            key={n.id}
-            note={n}
-            onChange={handleNoteComponentOnChange}
-            onDelete={handleNoteOnDelete}
-            index={i}
-            ediding={i === focusIndex}
-            onActive={handleNoteComponentOnActive}
-            blockType={blockType}
-          />
-        ))}
-      </S.Notes>
-      <S.AddNoteButtonWrapper>
-        <S.AddNoteButton onClick={addNote}>+ Tilføj note</S.AddNoteButton>
-      </S.AddNoteButtonWrapper>
+      <S.Content>
+        <S.Notes>
+          {notes.map((n, i) => (
+            <NoteComponent
+              key={n.id}
+              note={n}
+              onChange={handleNoteComponentOnChange}
+              onDelete={handleNoteOnDelete}
+              index={i}
+              ediding={i === focusIndex}
+              onActive={handleNoteComponentOnActive}
+              blockType={blockType}
+            />
+          ))}
+        </S.Notes>
+        <S.AddNoteButtonWrapper>
+          <S.AddNoteButton onClick={addNote}>+ Tilføj note</S.AddNoteButton>
+        </S.AddNoteButtonWrapper>
+      </S.Content>
+      <S.Footer>
+        {" "}
+        {` ${focusIndex} | Total time: ${getFormattedTimeFromNotes(notes)}`}
+      </S.Footer>
     </S.Wrapper>
   );
 };

@@ -10,12 +10,7 @@ import {
 } from "react";
 import { useInterval } from "../useInterval";
 import TimeToggle from "../TimeToggle";
-
-function getTotalTime(active: boolean, lastUpdated: number, timeSpend: number) {
-  const currentTime = new Date().getTime();
-
-  return active ? timeSpend + (currentTime - lastUpdated) : timeSpend;
-}
+import { getTotalTime } from "../noteUtils";
 
 interface NoteComponentProps {
   note: INote;

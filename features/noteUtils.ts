@@ -70,3 +70,27 @@ export function convertJSONINoteBLock(
 function newId() {
   return Math.random() + "" + Math.random();
 }
+
+export function getTotalTime(
+  active: boolean,
+  lastUpdated: number,
+  timeSpend: number
+) {
+  const currentTime = new Date().getTime();
+
+  return active ? timeSpend + (currentTime - lastUpdated) : timeSpend;
+}
+export function formatTime(time: number) {
+  let seconds = time / 1000;
+  if (seconds < 60) return Math.floor(seconds) + "s";
+  else if (seconds < 3600) return Math.floor(seconds / 60) + "m";
+  else return Math.round(seconds / 360) / 10 + "h";
+}
+
+export function getFormattedTimeFromNotes(notes: INote[]) {
+  return formatTime(
+    notes
+      .map((n) => getTotalTime(n.active, n.lastUpdatedTimeSpend, n.timeSpend))
+      .reduce((partialSum, a) => partialSum + a, 0)
+  );
+}
