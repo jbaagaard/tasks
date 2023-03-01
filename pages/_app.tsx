@@ -4,14 +4,40 @@ import { ThemeProvider } from "styled-components";
 import { eightOOEight } from "../styles/theme";
 import { PopupContainer, PopupProvider } from "../features/Popup";
 import { ThemeContextProvider } from "../features/ThemeContext";
+import Head from "next/head";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <ThemeContextProvider>
-      <PopupProvider>
-        <Component {...pageProps} />
-        <PopupContainer />
-      </PopupProvider>
-    </ThemeContextProvider>
+    <>
+      <Head>
+        <title>Task timer</title>
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicon-16x16.png"
+        />
+        <link rel="manifest" href="/site.webmanifest" />
+        <meta name="msapplication-TileColor" content="#da532c" />
+        <meta name="theme-color" content="#ffffff" />
+      </Head>
+      <ThemeContextProvider>
+        <PopupProvider>
+          <Component {...pageProps} />
+          <PopupContainer />
+        </PopupProvider>
+      </ThemeContextProvider>
+    </>
   );
 }
