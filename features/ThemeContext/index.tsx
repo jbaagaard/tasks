@@ -17,9 +17,9 @@ interface ThemeContextProviderProps {
 export const ThemeContextProvider = ({
   children,
 }: ThemeContextProviderProps) => {
-  const [currentTheme, setCurrentTheme] = useState<string>("eightOOEight");
+  const [currentTheme, setCurrentTheme] = useState<string>("hanok");
   useEffect(() => {
-    setCurrentTheme(localStorage.getItem("theme") || "eightOOEight");
+    setCurrentTheme(localStorage.getItem("theme") || "hanok");
   }, []);
   const value: ThemeContextProps = {
     currentTheme: currentTheme,
