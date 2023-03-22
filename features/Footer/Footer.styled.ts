@@ -16,6 +16,7 @@ export const Text = styled.div`
   color: ${(props) => props.theme.bg};
   padding: 0 8px;
   line-height: 22px;
+  width: fit-content;
 `;
 
 export const Select = styled.select`
@@ -24,15 +25,12 @@ export const Select = styled.select`
   background-color: ${(props) => props.theme.text};
   font-size: 14px;
   color: ${(props) => props.theme.bg};
-  padding: 0 8px;
-  line-height: 22px;
+  padding-right: 8px;
 `;
 
 export const Option = styled.option`
   font-size: 14px;
   color: ${(props) => props.theme.bg};
-  padding: 0 8px;
-  line-height: 22px;
 
   outline: none;
   border: none;
@@ -40,4 +38,8 @@ export const Option = styled.option`
     outline: none;
     border: none;
   }
+`;
+
+export const RightWrapper = styled.div`
+  display: flex;
 `;

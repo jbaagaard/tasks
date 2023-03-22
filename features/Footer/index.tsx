@@ -31,9 +31,12 @@ const Footer = ({}: FooterProps) => {
       <S.Text>
         {` ${focusIndex} | Total time: ${getFormattedTimeFromNotes(notes)}`}
       </S.Text>
-      <S.Select onChange={handleOnSelect} defaultValue={currentTheme}>
-        {getOptions().map((o) => o)}
-      </S.Select>
+      <S.RightWrapper>
+        <S.Text>theme: </S.Text>
+        <S.Select onChange={handleOnSelect} defaultValue={currentTheme}>
+          {getOptions().map((o) => o)}
+        </S.Select>
+      </S.RightWrapper>
     </S.Wrapper>
   );
 };
