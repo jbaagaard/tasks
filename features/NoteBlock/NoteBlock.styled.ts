@@ -22,6 +22,7 @@ export const AddNoteButtonWrapper = styled.div`
   box-sizing: border-box;
   display: flex;
   justify-content: center;
+  gap: 24px;
 `;
 
 export const AddNoteButton = styled(SecondaryButton)`

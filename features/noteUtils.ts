@@ -36,9 +36,9 @@ export function newNoteBlock(date: Date): INoteBlock {
     notes: [
       emptyNote("//Hello world!"),
       emptyNote(),
-      emptyNote(),
-      emptyNote(),
-      emptyNote(),
+      emptyNote("task #1"),
+      emptyNote("task #2"),
+      emptyNote("task #3"),
       emptyNote(),
       emptyNote(),
     ],

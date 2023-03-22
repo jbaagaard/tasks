@@ -22,13 +22,13 @@ const TopMenu = ({ value, onChange }: TopMenuProps) => {
   return (
     <S.Wrapper>
       <S.Button onClick={handleDailyOnClick} active={value === "daily"}>
-        daily
+        daily notes
       </S.Button>
       <S.Button onClick={handleRecurringOnClick} active={value === "template"}>
         template
       </S.Button>
       <S.Button onClick={handleGlobalOnClick} active={value === "global"}>
-        global
+        permenent notes
       </S.Button>
     </S.Wrapper>
   );
