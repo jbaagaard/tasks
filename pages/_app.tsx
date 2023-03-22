@@ -11,6 +11,10 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <title>Task timer</title>
+        <meta
+          name={"description"}
+          content={"A web-app for timing your everyday tasks"}
+        />
         <link
           rel="apple-touch-icon"
           sizes="180x180"
