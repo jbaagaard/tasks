@@ -11,6 +11,6 @@ export const Button = styled.button<{ active: boolean }>`
   outline: none;
   border: none;
   color: ${(props) => props.theme.text};
-  padding: 8px 0;
+  padding: 0.5rem 0;
   cursor: pointer;
 `;

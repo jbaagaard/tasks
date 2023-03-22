@@ -3,30 +3,30 @@ import { SecondaryButton } from "../styled-components";
 export const Wrapper = styled.div``;
 
 export const Content = styled.div`
-  max-width: 1000px;
+  max-width: 62.5rem;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  padding: 16px 0 40px 0;
+  gap: 1rem;
+  padding: 1rem 0 2.5rem 0;
 `;
 
 export const Notes = styled.div`
   display: flex;
   flex-direction: column;
-  padding-right: 8px;
+  padding-right: 0.5rem;
 `;
 
 export const AddNoteButtonWrapper = styled.div`
   width: 100%;
-  max-width: 800px;
+  max-width: 50rem;
   box-sizing: border-box;
   display: flex;
   justify-content: center;
-  gap: 24px;
+  gap: 1.5rem;
 `;
 
 export const AddNoteButton = styled(SecondaryButton)`
   width: fit-content;
-  padding: 6px 32px;
+  padding: 0.375rem 2rem;
   height: fit-content;
 `;

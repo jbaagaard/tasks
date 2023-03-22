@@ -6,13 +6,13 @@ export const Wrapper = styled.div`
 `;
 
 export const Header = styled.div`
-  height: 32px;
+  height: 2rem;
   background-color: ${(props) => props.theme.bgLight};
 `;
 
 export const HeaderContent = styled.div`
   display: flex;
-  max-width: 800px;
+  max-width: 50rem;
   width: 100%;
   justify-content: center;
 `;

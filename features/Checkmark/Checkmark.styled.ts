@@ -2,9 +2,9 @@ import styled, { css } from "styled-components";
 import { Status } from "../types";
 
 export const Checkmark = styled.button<{ status: Status }>`
-  height: 32px;
-  width: 32px;
-  border-radius: 99px;
+  height: 2rem;
+  width: 2rem;
+  border-radius: 6.1875rem;
   box-sizing: border-box;
   color: ${(props) => props.theme.greenText};
   ${(props) => props.status === "Not Started" && "background-color: none"};

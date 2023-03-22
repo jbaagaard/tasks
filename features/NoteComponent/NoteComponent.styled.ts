@@ -1,17 +1,17 @@
 import styled from "styled-components";
 import { SecondaryButton } from "../styled-components";
 
-const lineHeight = "42px";
+const lineHeight = "2.625rem";
 
 export const Wrapper = styled.div`
-  max-width: 800px;
+  max-width: 50rem;
 
   display: grid;
   grid-template-columns: auto 1fr auto;
-  gap: 8px;
+  gap: 0.5rem;
   height: ${lineHeight};
   align-items: center;
-  padding-left: 8px;
+  padding-left: 0.5rem;
   &:hover {
     background-color: rgba(0, 0, 0, 0.03);
   }
@@ -23,15 +23,15 @@ export const DataWrapper = styled.div`
 
 export const RightContent = styled.div`
   display: flex;
-  gap: 8px;
+  gap: 0.5rem;
   align-items: center;
 `;
 
 export const LineNumber = styled.div`
   color: ${(props) => props.theme.textSubtle};
   line-height: ${lineHeight};
-  width: 38px;
-  border-right: 2px solid ${(props) => props.theme.textSubtler};
+  width: 2.375rem;
+  border-right: 0.125rem solid ${(props) => props.theme.textSubtler};
 `;
 
 export const InputWrapper = styled.div``;
