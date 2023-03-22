@@ -104,7 +104,7 @@ const NoteBLock = ({ noteBlock, blockType }: NoteBlockProps) => {
           ))}
         </S.Notes>
         <S.AddNoteButtonWrapper>
-          <S.AddNoteButton onClick={addNote}>+ Tilføj note</S.AddNoteButton>
+          <S.AddNoteButton onClick={addNote}>+ add note</S.AddNoteButton>
         </S.AddNoteButtonWrapper>
       </S.Content>
       <Footer />
