@@ -41,3 +41,7 @@ export async function wait(ms: number) {
   await new Promise((resolve) => setTimeout(resolve, ms));
   return;
 }
+
+export async function getAllData() {
+  return window.localStorage;
+}
