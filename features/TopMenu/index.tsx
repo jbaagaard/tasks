@@ -28,7 +28,7 @@ const TopMenu = ({ value, onChange }: TopMenuProps) => {
         template
       </S.Button>
       <S.Button onClick={handleGlobalOnClick} active={value === "global"}>
-        permenent notes
+        permanent notes
       </S.Button>
     </S.Wrapper>
   );
