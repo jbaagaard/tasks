@@ -3,6 +3,7 @@ export interface Theme {
   bgDark: string;
   bgLight: string;
   text: string;
+  textHighlight: string;
   textSubtle: string;
   textSubtler: string;
   red: string;
@@ -18,6 +19,7 @@ export const train: Theme = {
   bgDark: "#161819",
   bgLight: "#282828",
   text: "#d4be98",
+  textHighlight: "#e3ceaa",
   textSubtle: "#897f73",
   textSubtler: "#897f73",
   green: "#a9b665",
@@ -36,6 +38,7 @@ export const eightOOEight: Theme = {
   bgDark: "#2e343d",
   bgLight: "#464f5d",
   text: "#939eae",
+  textHighlight: "#b0bbcc",
   textSubtle: "#666e7a",
   textSubtler: "#4b525d",
   green: "#50d886",
@@ -52,6 +55,7 @@ export const hanok: Theme = {
   red: "#d29595",
   redText: "#8b6f5c",
   text: "#8b6f5c",
+  textHighlight: "#7c614f",
   textSubtle: "#b18d75",
   textSubtler: "#d7ab8e",
   yellow: "#d2cf95",
