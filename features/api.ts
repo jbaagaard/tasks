@@ -42,6 +42,13 @@ export async function wait(ms: number) {
   return;
 }
 
-export async function getAllData() {
+export async function exportAllData() {
   return window.localStorage;
+}
+
+export async function importData(data: string) {
+  const d = JSON.parse(data);
+  for (let prop in d) {
+    localStorage.setItem(prop, d[prop]);
+  }
 }

@@ -2,6 +2,8 @@ export type Status = "Not Started" | "In Progress" | "Done";
 
 export type BlockType = "daily" | "template" | "global";
 
+export interface FullDataImportDto {}
+
 export interface INoteBlock {
   id: string;
   date: Date;
