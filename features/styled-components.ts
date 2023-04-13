@@ -1,7 +1,17 @@
 import styled from "styled-components";
 
-export const SecondaryButton = styled.button`
-  all: unset;
+export const ButtonNoStyle = styled.button`
+  background-color: transparent;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  &:focus {
+    outline: none;
+    border: none;
+  }
+`;
+
+export const SecondaryButton = styled(ButtonNoStyle)`
   color: ${(props) => props.theme.text};
   background-color: ${(props) => props.theme.bg};
   border-radius: 0.5rem;
